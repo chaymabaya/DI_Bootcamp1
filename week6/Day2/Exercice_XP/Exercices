@@ -1,0 +1,25 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+
+#exrcice 1
+df = pd.read_csv("diabetes_prediction_dataset.csv")
+%matplotlib inline
+plt.scatter(df["smoking_history"] , df["diabetes"] , marker = "+" , color = 'red')
+df.isna().sum().sort_values(ascending=False)
+df["diabetes"].value_counts()
+x = pd.get_dummies(df.drop('diabetes' , axis = 'columns'))
+y = df['diabetes']
+x_train, x_test , y_train , y_test = train_test_split( x , y , test_size=0.2)
+x_train.shape
+x_test.shape
+#Exercice 2
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+model.fit(x_train, y_train)
+model.score(x_test, y_test )
+y_pred = model.predict(x_test)
+
+ #ercice 3 
+from sklearn.metrics import accuracy_score
+accuracy = accuracy_score(y_test , y_pred )

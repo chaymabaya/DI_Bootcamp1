@@ -14,12 +14,40 @@ y = df['diabetes']
 x_train, x_test , y_train , y_test = train_test_split( x , y , test_size=0.2)
 x_train.shape
 x_test.shape
-#Exercice 2
+#Exercice "3"
 model = RandomForestClassifier(n_estimators=100, random_state=42)
 model.fit(x_train, y_train)
 model.score(x_test, y_test )
 y_pred = model.predict(x_test)
 
- #ercice 3 
+ #ercice '4' 
 from sklearn.metrics import accuracy_score
 accuracy = accuracy_score(y_test , y_pred )
+plt.bar(["Acuracy"] , [accuracy])
+plt.ylim(0.1)
+plt.ylabel("Score")
+plt.title("Score de précision (Accuracy)")
+plt.show()
+import seaborn as sns
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(6,4))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+
+plt.xlabel("Valeurs prédites")
+plt.ylabel("Valeurs réelles")
+plt.title("Matrice de confusion")
+plt.show()
+
+
+from sklearn.metrics import precision_score, recall_score, f1_score
+
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+
+plt.bar(['Precision', 'Recall', 'F1-score'], [precision, recall, f1])
+plt.ylim(0, 1)
+plt.ylabel("Score")
+plt.title("Précision, Rappel et F1-score")
+plt.show()

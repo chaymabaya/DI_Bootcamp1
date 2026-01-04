@@ -6,3 +6,6 @@ ipywidgets
 matplotlib
 numpy
 pandas
+Scikit-learn
+seaborn
+tensorflow
